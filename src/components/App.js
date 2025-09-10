@@ -30,12 +30,13 @@ const App = () => {
   });
 
   const handleNext = () => {
-    if (formNumber < formTypes.length - 1) setFormNumber(formNumber + 1);
-  };
+  setFormNumber((prev) => Math.min(prev + 1, formTypes.length - 1));
+};
 
-  const handlePrev = () => {
-    if (formNumber > 0) setFormNumber(formNumber - 1);
-  };
+const handlePrev = () => {
+  setFormNumber((prev) => Math.max(prev - 1, 0));
+};
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
