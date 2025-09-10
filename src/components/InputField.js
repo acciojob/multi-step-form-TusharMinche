@@ -1,4 +1,3 @@
-// InputField.js
 import React from "react";
 
 const InputField = ({ data, formData, setFormData }) => {
@@ -11,7 +10,7 @@ const InputField = ({ data, formData, setFormData }) => {
   }
 
   return (
-    <div>
+    <div id={`step${data.id + 1}`}>  {/* <-- test expects #step1, #step2, #step3 */}
       <h3>{data.title}</h3>
       {data.fields.map((field) => (
         <div key={field.id}>
