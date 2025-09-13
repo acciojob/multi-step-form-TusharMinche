@@ -1,99 +1,71 @@
-Step.js
-import React from 'react'
+import React from 'react';
 
-const Step = ({ step, formData, setFormData, nextStep, prevStep, handleSubmit }) => {
-    const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.id]: e.target.value });
-    };
+function Step({ ind, setInd }) {
+  const handleNext = (e) => {
+    e.preventDefault();
+    setInd(prev => prev + 1);
+  };
+
+  const handlePrev = (e) => {
+    e.preventDefault();
+    setInd(prev => prev - 1);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setInd(1);
+  };
+
   return (
     <form>
-
-    {step === 1 && <h2>Customer Details</h2>}
-      {step === 2 && <h2>Car Details</h2>}
-      {step === 3 && <h2>Payment Details</h2>}
-
         <div id="step1">
-     {step === 1 && (
+      {ind === 1 && (
         <>
-          <label htmlFor="first_name">First Name:</label>
-          <input
-            type="text"
-            id="first_name"
-            value={formData.first_name}
-            onChange={handleChange}
-          />
+          <h1>Customer Details</h1>
+          <label>First Name</label>
+          <input type="text" id="first_name" />
           <br />
-
-          <label htmlFor="last_name">Last Name:</label>
-          <input
-            type="text"
-            id="last_name"
-            value={formData.last_name}
-            onChange={handleChange}
-          />
-          <button type="button" onClick={nextStep}>Next</button>
+          <label>Last Name</label>
+          <input type="text" id="last_name" />
+          <br />
+          <button onClick={handleNext} type="button">Next</button>
           </>
-        )}
-        </div>
-  
+      )}
+      </div>
       <div id="step2">
-      {step === 2 && (
+      {ind === 2 && (
         <>
-          <label htmlFor="model">Brand:</label>
-          <input
-            type="text"
-            id="model"
-            value={formData.model}
-            onChange={handleChange}
-          />
+          <h1>Car Details</h1>
+          <label>Model:</label>
+          <input id="model" />
           <br />
+          <label>Price:</label>
+          <input id="car_price" />
+          <br />
+          <button onClick={handlePrev} type="button">Previous</button>
+          <button onClick={handleNext} type="button">Next</button>
+          </>
+      )}
+       </div>
+      <div id="step3">
+      {ind === 3 && (
+<>
+          <h1>Payment Details</h1>
+          <label>Credit Card Number:</label>
+          <input id="card_info" type="number" />
+          <br />
+          <label>Expiry Date:</label>
+          <input type="text" placeholder="YYYY-MM-DD" pattern="\d{4}-\d{2}-\d{2}" id="expiry_date"/>
 
-          <label htmlFor="car_price">Model:</label>
-          <input
-            id="car_price"
-            value={formData.car_price}
-            onChange={handleChange}
-          />
-          <button type="button" onClick={prevStep}>Previous</button>
-          <button type="button" onClick={nextStep}>Next</button>
-        </>
+          <br />
+          <button onClick={handlePrev} type="button">Previous</button>
+          <button onClick={handleSubmit} type='submit'>Submit</button>
+          </>
+        
       )}
       </div>
-       
-       <div id="step3">
-      {step === 3 && (
-        <>
-          <label htmlFor="card_info">Credit Card Number:</label>
-          <input
-            id="card_info"
-            value={formData.card_info}
-            onChange={handleChange}
-          />
-          <br />
-
-          <label htmlFor="expiry_date">Expiration Date:</label>
-          <input
-            id="expiry_date"
-            value={formData.expiry_date}
-            onChange={handleChange}
-          />
-          <button type="button" onClick={prevStep}>Previous</button>
-          <button type="submit" onClick={handleSubmit}>Submit</button>
-        </>
-      )}
-      </div>
-
-
-      {/* <div>
-        {step > 1 && <button type="button" onClick={prevStep}>Previous</button>}
-        {step < 3 && <button onClick={nextStep}>Next</button>}
-        {step === 3 && <button onClick={handleSubmit}>Submit</button>}
-      </div> */}
-
-
-
     </form>
-  )
+  );
 }
 
-export default Step
+export default Step;
